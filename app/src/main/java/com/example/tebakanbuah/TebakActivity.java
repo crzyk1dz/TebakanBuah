@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.os.Handler;
 
 public class TebakActivity extends AppCompatActivity {
 
@@ -34,6 +35,16 @@ public class TebakActivity extends AppCompatActivity {
                 String jawabanUser = editText_jawaban.getText().toString();
                 if (jawabanUser.equals(jawaban)){
                     Toast.makeText(TebakActivity.this,"Jawaban benar!",Toast.LENGTH_SHORT).show();
+                    // Menunda pemulihan ke MainActivity selama 2 detik
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Memulai MainActivity setelah 2 detik
+                            Intent intent = new Intent(TebakActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish(); // Opsional, untuk menutup aktivitas saat ini
+                        }
+                    }, 2000); // 2000 milidetik = 2 detik
                 } else {
                     Toast.makeText(TebakActivity.this,"Jawaban salah!",Toast.LENGTH_SHORT).show();
                 }
